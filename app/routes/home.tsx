@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/Welcome";
+import { Login } from "../features/auth/components/Login";
+import { Dashboard } from "../features/dashboard/components/Dashboard";
 
 export function meta({ }: Route.MetaArgs) {
   return [
-    { title: "IlOveT" },
-    { name: "description", content: "Welcome to our IoT management app" },
+    { title: "Concierge" },
+    { name: "description", content: "Smart home dashboard" },
   ];
 }
 
