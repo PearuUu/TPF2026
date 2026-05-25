@@ -1,10 +1,10 @@
 import type { Route } from "./+types/home";
-import { Showcase } from "../features/showcase/components/Showcase";
+import { Welcome } from "../welcome/Welcome";
 
 export function meta({ }: Route.MetaArgs) {
   return [
-    { title: "Concierge Showcase" },
-    { name: "description", content: "Component showcase for the smart home UI" },
+    { title: "IlOveT" },
+    { name: "description", content: "Welcome to our IoT management app" },
   ];
 }
 
