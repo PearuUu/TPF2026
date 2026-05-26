@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { Avatar } from "../../../components/base/Avatar";
 import { Badge } from "../../../components/base/Badge";
 import { Button } from "../../../components/base/Button";
 import { Card } from "../../../components/base/Card";
 import { SectionHeader } from "../../../components/base/SectionHeader";
 import { Toggle } from "../../../components/base/Toggle";
+import { BasePageLayout } from "../../../components/layout/BasePageLayout";
 import {
     activities,
     dashboardStats,
@@ -22,111 +22,15 @@ const navItems = [
 const energyBars = [34, 46, 38, 60, 88, 56, 42, 30, 35, 49, 44, 28];
 
 export function Dashboard() {
-    const [sidebarOpen, setSidebarOpen] = useState(false);
-
     return (
-        <main className="min-h-screen">
-            {/* ── Mobile top bar ── */}
-            <div className="flex items-center justify-between border-b border-white/8 bg-slate-950/90 px-4 py-3 backdrop-blur-xl lg:hidden">
-                <div className="flex items-center gap-2.5">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-sky-400/15 text-base text-sky-300">
-                        ⌂
-                    </div>
-                    <div>
-                        <p className="text-sm font-semibold leading-none text-white">Concierge</p>
-                        <p className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.2em] text-emerald-400">
-                            System active
-                        </p>
-                    </div>
-                </div>
-                <div className="flex items-center gap-2">
-                    <button
-                        className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300"
-                        type="button"
-                        aria-label="Notifications"
-                    >
-                        🔔
-                    </button>
-                    <Avatar name="Alex Morgan" size="sm" />
-                </div>
-            </div>
-
-            {/* ── Sidebar overlay (mobile) ── */}
-            {sidebarOpen && (
-                <div
-                    className="fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-sm lg:hidden"
-                    onClick={() => setSidebarOpen(false)}
-                    aria-hidden="true"
-                />
-            )}
-
-            <div className="lg:flex lg:min-h-screen">
-                {/* ── Sidebar ── */}
-                <aside
-                    className={`fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-white/8 bg-slate-950/95 px-5 py-6 backdrop-blur-xl transition-transform duration-300 lg:static lg:translate-x-0 lg:w-[260px] lg:rounded-none lg:border-r lg:border-white/8 lg:bg-slate-950/85 lg:shadow-[0_24px_70px_rgba(2,8,23,0.45)] ${
-                        sidebarOpen ? "translate-x-0" : "-translate-x-full"
-                    }`}
-                >
-                    {/* Sidebar header */}
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-sky-400/15 text-lg text-sky-300">
-                                ⌂
-                            </div>
-                            <div>
-                                <p className="text-sm font-semibold text-white">Concierge</p>
-                                <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-emerald-400">
-                                    System active
-                                </p>
-                            </div>
-                        </div>
-                        <button
-                            className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-400 hover:bg-white/8 hover:text-white lg:hidden"
-                            type="button"
-                            onClick={() => setSidebarOpen(false)}
-                            aria-label="Close menu"
-                        >
-                            ✕
-                        </button>
-                    </div>
-
-                    <nav className="mt-8 space-y-2">
-                        {navItems.map((item) => (
-                            <button
-                                key={item.label}
-                                className={`flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-medium transition ${
-                                    item.active
-                                        ? "bg-slate-800/90 text-emerald-300 shadow-lg shadow-emerald-500/10"
-                                        : "text-slate-400 hover:bg-white/5 hover:text-slate-100"
-                                }`}
-                                type="button"
-                                onClick={() => setSidebarOpen(false)}
-                            >
-                                <span className="text-lg">{item.icon}</span>
-                                {item.label}
-                            </button>
-                        ))}
-                    </nav>
-
-                    <Card className="mt-6 bg-linear-to-br from-sky-500/20 to-emerald-500/10 p-5">
-                        <div className="flex items-center gap-2 text-sky-200">
-                            <span>✦</span>
-                            <p className="text-sm font-semibold">Wskazówka od Concierge</p>
-                        </div>
-                        <p className="mt-4 text-sm leading-6 text-slate-300">
-                            Obniżenie temperatury o zaledwie 1°C w nocy może zmniejszyć Twoje
-                            rachunki za ogrzewanie o około 6% rocznie.
-                        </p>
-                        <Button className="mt-4 w-full" variant="secondary">
-                            Optymalizuj teraz
-                        </Button>
-                    </Card>
-                </aside>
-
-                {/* ── Main content ── */}
-                <section className="flex-1 overflow-x-hidden px-4 py-4 pb-24 lg:px-6 lg:py-6 lg:pb-6">
-                    {/* Desktop page header */}
-                    <header className="hidden lg:flex lg:flex-row lg:items-start lg:justify-between gap-6 border-b border-white/6 pb-6 mb-6">
+        <BasePageLayout
+            navItems={navItems}
+            onNavItemClick={(label) => console.log(`Navigated to: ${label}`)}
+            tipDescription="Obniżenie temperatury o zaledwie 1°C w nocy może zmniejszyć Twoje rachunki za ogrzewanie o około 6% rocznie."
+            onTipButtonClick={() => console.log("Optimize clicked")}
+        >
+            {/* ── Page Header ── */}
+            <header className="hidden lg:flex lg:flex-row lg:items-start lg:justify-between gap-6 border-b border-white/6 pb-6 mb-6">
                         <div>
                             <p className="text-sm font-medium text-slate-400">Home Sweet Home</p>
                             <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white">
@@ -151,10 +55,10 @@ export function Dashboard() {
                             </button>
                             <Avatar name="Alex Morgan" />
                         </div>
-                    </header>
+            </header>
 
-                    {/* Mobile page header (compact) */}
-                    <div className="mb-5 lg:hidden">
+            {/* ── Mobile Page Header ── */}
+            <div className="mb-5 lg:hidden">
                         <p className="text-xs font-medium text-slate-400">Home Sweet Home</p>
                         <h1 className="mt-1.5 text-2xl font-semibold tracking-tight text-white">
                             Witaj w domu, Alex.
@@ -166,10 +70,10 @@ export function Dashboard() {
                                 72°F · Clear
                             </div>
                         </div>
-                    </div>
+            </div>
 
-                    {/* ── Stats grid ── */}
-                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:gap-4">
+            {/* ── Stats grid ── */}
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:gap-4">
                         {dashboardStats.map((stat) => (
                             <Card key={stat.label} className="p-4 lg:p-5">
                                 <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500 lg:text-xs">
@@ -183,10 +87,10 @@ export function Dashboard() {
                                 </p>
                             </Card>
                         ))}
-                    </div>
+            </div>
 
-                    {/* ── Devices + Activity two-col on large screens ── */}
-                    <div className="mt-5 grid gap-5 lg:mt-6 lg:gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
+            {/* ── Devices + Activity two-col on large screens ── */}
+            <div className="mt-5 grid gap-5 lg:mt-6 lg:gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
                         {/* Left column */}
                         <div className="space-y-5 lg:space-y-6">
                             {/* Favorite devices */}
@@ -360,33 +264,6 @@ export function Dashboard() {
                             </Card>
                         </div>
                     </div>
-                </section>
-            </div>
-
-            {/* ── Mobile bottom nav ── */}
-            <nav className="fixed bottom-0 inset-x-0 z-30 flex items-center border-t border-white/8 bg-slate-950/95 backdrop-blur-xl lg:hidden">
-                {navItems.map((item) => (
-                    <button
-                        key={item.label}
-                        type="button"
-                        className={`flex flex-1 flex-col items-center gap-1 py-3 text-xs font-medium transition ${
-                            item.active ? "text-emerald-400" : "text-slate-500"
-                        }`}
-                    >
-                        <span className="text-xl leading-none">{item.icon}</span>
-                        <span className="text-[10px] font-medium">{item.label}</span>
-                    </button>
-                ))}
-            </nav>
-
-            {/* ── FAB (hidden on mobile — bottom nav takes over) ── */}
-            <button
-                className="fixed bottom-6 right-6 hidden h-14 w-14 items-center justify-center rounded-2xl bg-emerald-400 text-2xl font-semibold text-slate-950 shadow-[0_18px_40px_rgba(16,185,129,0.35)] lg:flex"
-                type="button"
-                aria-label="Add"
-            >
-                +
-            </button>
-        </main>
+            </BasePageLayout>
     );
 }
