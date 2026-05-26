@@ -2,6 +2,15 @@ import type { ReactNode } from "react";
 import { Card } from "../base/Card";
 import { Button } from "../base/Button";
 import { NavItem } from "./NavItem";
+import { useNavigate } from "react-router";
+import { useLocation } from 'react-router'
+
+const navItems = [
+    { label: "Dashboard", active: false, icon: "▣" , direction: ""},
+    { label: "Devices", active: true, icon: "▤" , direction: "devices"},
+    { label: "Automation", active: false, icon: "◫", direction: "automation"},
+    { label: "Settings", active: false, icon: "⚙", direction: "settings"},
+];
 
 type NavItemData = {
     label: string;
@@ -12,7 +21,7 @@ type NavItemData = {
 type SidebarProps = {
     isOpen: boolean;
     onClose: () => void;
-    navItems: NavItemData[];
+    // navItems: NavItemData[];
     onNavItemClick?: (label: string) => void;
     appName?: string;
     appStatus?: string;
@@ -25,7 +34,7 @@ type SidebarProps = {
 export function Sidebar({
     isOpen,
     onClose,
-    navItems,
+    // navItems,
     onNavItemClick,
     appName = "Concierge",
     appStatus = "System active",
@@ -34,6 +43,8 @@ export function Sidebar({
     tipButtonLabel = "Optymalizuj teraz",
     onTipButtonClick,
 }: SidebarProps) {
+    const navigate = useNavigate();
+    const location = useLocation();
     return (
         <>
             {/* ── Sidebar overlay (mobile) ── */}
@@ -80,15 +91,17 @@ export function Sidebar({
                             key={item.label}
                             label={item.label}
                             icon={item.icon}
-                            active={item.active}
+                            active={`/${item.direction}` == location.pathname}
                             onClick={() => {
                                 onNavItemClick?.(item.label);
                                 onClose();
+                                navigate(`/${item.direction}`);
+                                console.log(location.pathname);
                             }}
                         />
                     ))}
                 </nav>
-
+                
                 {/* Tip Card */}
                 {tipDescription && (
                     <Card className="mt-6 bg-linear-to-br from-sky-500/20 to-emerald-500/10 p-5">
