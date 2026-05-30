@@ -46,17 +46,6 @@ export function Dashboard() {
                 </div>
                 <div className="flex flex-wrap items-center gap-3">
                     <Badge tone="emerald">Wszystkie systemy aktywne</Badge>
-                    <div className="flex items-center gap-2 rounded-full border border-white/8 bg-white/5 px-3 py-2 text-xs text-slate-300">
-                        <span className="text-emerald-400">●</span>
-                        72°F · Clear
-                    </div>
-                    <button
-                        className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300"
-                        type="button"
-                    >
-                        🔔
-                    </button>
-                    <Avatar name="Alex Morgan" />
                 </div>
             </header>
 
