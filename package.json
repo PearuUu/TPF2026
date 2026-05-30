@@ -9,6 +9,7 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
+    "@hotjar/browser": "^1.0.9",
     "@react-router/node": "7.14.0",
     "@react-router/serve": "7.14.0",
     "isbot": "^5.1.36",
