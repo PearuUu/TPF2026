@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { Avatar } from "../base/Avatar";
 
 export function Header() {
@@ -106,7 +107,9 @@ export function Header() {
                 </button>
 
                 {/* Avatar */}
-                <Avatar name="John Doe" size="md" />
+                <Link to="/settings" className="rounded-full overflow-hidden hover:ring-2 hover:ring-emerald-500 transition-all flex items-center justify-center">
+                    <Avatar src="https://i.pravatar.cc/150?img=11" alt="Elias Vance" size="md" />
+                </Link>
             </div>
         </div>
     );

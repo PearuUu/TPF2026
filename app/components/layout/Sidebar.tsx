@@ -5,11 +5,13 @@ import { NavItem } from "./NavItem";
 import { useNavigate } from "react-router";
 import { useLocation } from 'react-router'
 
+import { LayoutGrid, MonitorSmartphone, Bot, Settings as SettingsIcon } from "lucide-react";
+
 const navItems = [
-    { label: "Dashboard", active: false, icon: "▣", direction: "" },
-    { label: "Devices", active: true, icon: "▤", direction: "devices" },
-    { label: "Automation", active: false, icon: "◫", direction: "automation" },
-    { label: "Settings", active: false, icon: "⚙", direction: "settings" },
+    { label: "Dashboard", active: false, icon: <LayoutGrid size={18} />, direction: "" },
+    { label: "Devices", active: true, icon: <MonitorSmartphone size={18} />, direction: "devices" },
+    { label: "Automation", active: false, icon: <Bot size={18} />, direction: "automation" },
+    { label: "Settings", active: false, icon: <SettingsIcon size={18} />, direction: "settings" },
 ];
 
 type NavItemData = {

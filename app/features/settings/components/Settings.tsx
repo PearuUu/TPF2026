@@ -4,13 +4,13 @@ import { Badge } from "../../../components/base/Badge";
 import { Button } from "../../../components/base/Button";
 import { Card } from "../../../components/base/Card";
 import { BasePageLayout } from "../../../components/layout/BasePageLayout";
-import { Pencil, MapPin, Clock, Plus, MoreVertical, RefreshCw } from "lucide-react";
+import { Pencil, MapPin, Clock, Plus, MoreVertical, RefreshCw, LayoutGrid, MonitorSmartphone, Bot, Settings as SettingsIcon } from "lucide-react";
 
 const navItems = [
-    { label: "Dashboard", active: false, icon: "▣" },
-    { label: "Devices", active: false, icon: "▤" },
-    { label: "Automation", active: false, icon: "◫" },
-    { label: "Settings", active: true, icon: "⚙" },
+    { label: "Dashboard", active: false, icon: <LayoutGrid size={18} /> },
+    { label: "Devices", active: false, icon: <MonitorSmartphone size={18} /> },
+    { label: "Automation", active: false, icon: <Bot size={18} /> },
+    { label: "Settings", active: true, icon: <SettingsIcon size={18} /> },
 ];
 
 export function Settings() {

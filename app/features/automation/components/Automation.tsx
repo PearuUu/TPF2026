@@ -6,11 +6,13 @@ import { SceneCard } from "./SceneCard";
 import { LogicRuleRow } from "./LogicRuleRow";
 import { Tv, Moon, Zap, UserPlus, Plus } from "lucide-react";
 
+import { LayoutGrid, MonitorSmartphone, Bot, Settings as SettingsIcon } from "lucide-react";
+
 const navItems = [
-    { label: "Dashboard", active: false, icon: "▣" },
-    { label: "Devices", active: false, icon: "▤" },
-    { label: "Automation", active: true, icon: "◫" },
-    { label: "Settings", active: false, icon: "⚙" },
+    { label: "Dashboard", active: false, icon: <LayoutGrid size={18} /> },
+    { label: "Devices", active: false, icon: <MonitorSmartphone size={18} /> },
+    { label: "Automation", active: true, icon: <Bot size={18} /> },
+    { label: "Settings", active: false, icon: <SettingsIcon size={18} /> },
 ];
 
 const SCENES_MOCK = [
