@@ -11,17 +11,29 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+    const [isChecking, setIsChecking] = useState(true);
     const [loggedIn, setLoggedIn] = useState(false);
 
     useEffect(() => {
-      if (sessionStorage.getItem('isLoggedIn')) setLoggedIn(true);
+        if (sessionStorage.getItem('isLoggedIn') === 'true') {
+            setLoggedIn(true);
+        }
+        setIsChecking(false);
     }, []);
 
+    if (isChecking) {
+        return null; 
+    }
+
     if (!loggedIn) {
-        return <Login onLogin={() => {
-          setLoggedIn(true);
-          sessionStorage.setItem('isLoggedIn', 'true')
-        }} />;
+        return (
+            <Login 
+                onLogin={() => {
+                    setLoggedIn(true);
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                }} 
+            />
+        );
     }
 
     return <Dashboard />;
