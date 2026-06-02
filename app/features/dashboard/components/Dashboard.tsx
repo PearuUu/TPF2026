@@ -32,7 +32,6 @@ export function Dashboard() {
             tipDescription="Obniżenie temperatury o zaledwie 1°C w nocy może zmniejszyć Twoje rachunki za ogrzewanie o około 6% rocznie."
             onTipButtonClick={() => console.log("Optimize clicked")}
         >
-            {/* ── Page Header ── */}
             <header className="hidden lg:flex lg:flex-row lg:items-start lg:justify-between gap-6 border-b border-white/6 pb-6 mb-6">
                 <div>
                     <p className="text-sm font-medium text-slate-400">Home Sweet Home</p>
@@ -49,7 +48,6 @@ export function Dashboard() {
                 </div>
             </header>
 
-            {/* ── Mobile Page Header ── */}
             <div className="mb-5 lg:hidden">
                 <p className="text-xs font-medium text-slate-400">Home Sweet Home</p>
                 <h1 className="mt-1.5 text-2xl font-semibold tracking-tight text-white">
@@ -64,7 +62,6 @@ export function Dashboard() {
                 </div>
             </div>
 
-            {/* ── Stats grid ── */}
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:gap-4">
                 {dashboardStats.map((stat) => (
                     <Card key={stat.label} className="p-4 lg:p-5">
@@ -81,11 +78,8 @@ export function Dashboard() {
                 ))}
             </div>
 
-            {/* ── Devices + Activity two-col on large screens ── */}
             <div className="mt-5 grid gap-5 lg:mt-6 lg:gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
-                {/* Left column */}
                 <div className="space-y-5 lg:space-y-6">
-                    {/* Favorite devices */}
                     <div>
                         <SectionHeader
                             title="Ulubione Urządzenia"
@@ -183,7 +177,6 @@ export function Dashboard() {
                     </div>
                 </div>
 
-                {/* Right column — activity + status */}
                 <div className="space-y-5 lg:space-y-6">
                     <Card className="p-4 lg:p-5">
                         <SectionHeader title="Ostatnia Aktywność" />
