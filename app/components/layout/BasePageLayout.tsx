@@ -40,7 +40,7 @@ export function BasePageLayout({
             <Sidebar
                 isOpen={sidebarOpen}
                 onClose={() => setSidebarOpen(false)}
-                navItems={navItems}
+                // navItems={navItems}
                 onNavItemClick={onNavItemClick}
                 appName={appName}
                 appStatus={appStatus}

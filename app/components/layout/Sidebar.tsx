@@ -2,6 +2,17 @@ import type { ReactNode } from "react";
 import { Card } from "../base/Card";
 import { Button } from "../base/Button";
 import { NavItem } from "./NavItem";
+import { useNavigate } from "react-router";
+import { useLocation } from 'react-router'
+
+import { LayoutGrid, MonitorSmartphone, Bot, Settings as SettingsIcon } from "lucide-react";
+
+const navItems = [
+    { label: "Dashboard", active: false, icon: <LayoutGrid size={18} />, direction: "" },
+    { label: "Devices", active: true, icon: <MonitorSmartphone size={18} />, direction: "devices" },
+    { label: "Automation", active: false, icon: <Bot size={18} />, direction: "automation" },
+    { label: "Settings", active: false, icon: <SettingsIcon size={18} />, direction: "settings" },
+];
 
 type NavItemData = {
     label: string;
@@ -12,7 +23,7 @@ type NavItemData = {
 type SidebarProps = {
     isOpen: boolean;
     onClose: () => void;
-    navItems: NavItemData[];
+    // navItems: NavItemData[];
     onNavItemClick?: (label: string) => void;
     appName?: string;
     appStatus?: string;
@@ -25,7 +36,7 @@ type SidebarProps = {
 export function Sidebar({
     isOpen,
     onClose,
-    navItems,
+    // navItems,
     onNavItemClick,
     appName = "Concierge",
     appStatus = "System active",
@@ -34,6 +45,8 @@ export function Sidebar({
     tipButtonLabel = "Optymalizuj teraz",
     onTipButtonClick,
 }: SidebarProps) {
+    const navigate = useNavigate();
+    const location = useLocation();
     return (
         <>
             {/* ── Sidebar overlay (mobile) ── */}
@@ -80,10 +93,12 @@ export function Sidebar({
                             key={item.label}
                             label={item.label}
                             icon={item.icon}
-                            active={item.active}
+                            active={`/${item.direction}` == location.pathname}
                             onClick={() => {
                                 onNavItemClick?.(item.label);
                                 onClose();
+                                navigate(`/${item.direction}`);
+                                console.log(location.pathname);
                             }}
                         />
                     ))}
