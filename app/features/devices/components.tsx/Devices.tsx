@@ -6,6 +6,9 @@ import { Card } from "../../../components/base/Card";
 import { SectionHeader } from "../../../components/base/SectionHeader";
 import { Toggle } from "../../../components/base/Toggle";
 import { BasePageLayout } from "../../../components/layout/BasePageLayout";
+// import { DeviceCard } from "../../../components/base/DeviceCard"
+// import { Lightbulb, Thermometer, Tv } from 'lucide-react';
+import { DevicePageLayout } from "../../../components/layout/DevicePageLayout"
 
 const navItems = [
     { label: "Dashboard", active: true, icon: "▣" },
@@ -38,6 +41,31 @@ export function Devices() {
                     </p>
                 </div>
             </header>
+
+            {/* <div className="grid grid-cols-2 gap-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-4">
+            <DeviceCard 
+                location="Salon"
+                title={`Oświetlenie\ngłówne`}
+                activeStatusText="80% jasności"
+                Icon={Lightbulb}
+            />
+
+            <DeviceCard
+                location="Sypialnia"
+                title={`Klimatyzacja`}
+                activeStatusText="Chłodzenie - 21C"
+                Icon={Thermometer}
+            />
+
+            <DeviceCard
+                location="Salon"
+                title={`Smart TV 4K`}
+                activeStatusText="Włączony"
+                Icon={Tv}
+            />
+            </div> */}
+
+            <DevicePageLayout/>
 
             {/* ── Mobile Page Header ── */}
             <div className="mb-5 lg:hidden">
