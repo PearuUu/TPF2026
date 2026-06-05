@@ -4,5 +4,6 @@ export default [
     index("routes/home.tsx"),
     route("devices", "routes/devices.tsx"),
     route("automation", "routes/automation.tsx"),
-    route("settings", "routes/settings.tsx")
+    route("settings", "routes/settings.tsx"),
+    route("addDevice", "routes/AddDevice.tsx")
 ] satisfies RouteConfig;

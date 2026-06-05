@@ -1,14 +1,10 @@
 import { useState } from "react";
-import { Avatar } from "../../../components/base/Avatar";
 import { Badge } from "../../../components/base/Badge";
-import { Button } from "../../../components/base/Button";
-import { Card } from "../../../components/base/Card";
-import { SectionHeader } from "../../../components/base/SectionHeader";
-import { Toggle } from "../../../components/base/Toggle";
 import { BasePageLayout } from "../../../components/layout/BasePageLayout";
-import { DevicePageLayout } from "../../../components/layout/DevicePageLayout"
-import AddDeviceButton from "~/components/base/AddDeviceButton";
 import { useNavigate } from "react-router";
+import { Lightbulb, Radio, Video, Plug, Thermometer, Ellipsis } from 'lucide-react';
+import DeviceType from "~/components/base/DeviceType";
+import { DevicePageLayout } from "~/components/layout/DevicePageLayout";
 
 const navItems = [
     { label: "Dashboard", active: true, icon: "▣" },
@@ -19,7 +15,7 @@ const navItems = [
 
 const energyBars = [34, 46, 38, 60, 88, 56, 42, 30, 35, 49, 44, 28];
 
-export function Devices() {
+export function AddDevice() {
     const navigate = useNavigate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -38,13 +34,58 @@ export function Devices() {
                         Witaj w domu, Alex.
                     </h1>
                     <p className="mt-4 max-w-2xl text-base leading-6 text-slate-400">
-                        Urządzenia
+                        Dodaj urządzenie
                     </p>
                 </div>
             </header>
 
             <DevicePageLayout/>
-            <AddDeviceButton onClick={()=> {navigate("/addDevice")}}/>
+
+            {/* <div className="bg-[#2D3449] min-h-screen p-6 md:p-12 flex justify-center items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 max-w-[1400px] w-full">
+                    <DeviceType 
+                        title="Oświetlenie"
+                        content="Żarównki, taśmy led, panele"
+                        Icon={Lightbulb}
+                        initialState={false}
+                    />
+
+                    <DeviceType 
+                        title="Czujnik"
+                        content="Ruch, dym, zalanie, CO2"
+                        Icon={Radio}
+                        initialState={false}
+                    />
+
+                    <DeviceType 
+                        title="Kamera"
+                        content="Monitoring, dzwonek video"
+                        Icon={Video}
+                        initialState={true}
+                    />
+
+                    <DeviceType 
+                        title="Gniezdko"
+                        content="Smart plug'i i listwy"
+                        Icon={Plug}
+                        initialState={false}
+                    />
+
+                    <DeviceType 
+                        title="Klimat"
+                        content="Termostaty, nawilzacze"
+                        Icon={Thermometer}
+                        initialState={false}
+                    />
+
+                    <DeviceType 
+                        title="Inne"
+                        content="Ustawienia niestandardowe"
+                        Icon={Ellipsis}
+                        initialState={false}
+                    />
+                </div>
+            </div> */}
 
             {/* ── Mobile Page Header ── */}
             <div className="mb-5 lg:hidden">
