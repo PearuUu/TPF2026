@@ -1,19 +1,18 @@
 import { useState } from "react";
 import { Button } from "../../../components/base/Button";
 import { Card } from "../../../components/base/Card";
+import { signIn, signInWithGoogle, getMockUsers } from "../authService";
 
 type Field = "email" | "password";
 
-const MOCK_USER = {
-    email: "test@mail.com",
-    password: "123",
-};
+const IS_DEV = true;
 
 export function Login({ onLogin }: { onLogin?: () => void }) {
     const [fields, setFields] = useState({ email: "", password: "" });
     const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [googleLoading, setGoogleLoading] = useState(false);
     const [authError, setAuthError] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
 
@@ -42,18 +41,47 @@ export function Login({ onLogin }: { onLogin?: () => void }) {
             return;
         }
         setLoading(true);
-        await new Promise((r) => setTimeout(r, 900));
-        setLoading(false);
-
-        if (
-            fields.email === MOCK_USER.email &&
-            fields.password === MOCK_USER.password
-        ) {
+        setAuthError("");
+        try {
+            await signIn(fields.email, fields.password);
             onLogin?.();
-        } else {
-            setAuthError("Invalid email or password. Try alex@concierge.home / password123");
+        } catch (err: unknown) {
+            const code = (err as { code?: string })?.code ?? "";
+            if (
+                code === "auth/user-not-found" ||
+                code === "auth/wrong-password" ||
+                code === "auth/invalid-credential"
+            ) {
+                setAuthError("Invalid email or password. Please try again.");
+            } else if (code === "auth/too-many-requests") {
+                setAuthError("Too many failed attempts. Please wait and try again.");
+            } else if (code === "auth/network-request-failed") {
+                setAuthError("Network error. Check your connection and try again.");
+            } else {
+                setAuthError("Sign-in failed. Please try again.");
+            }
+        } finally {
+            setLoading(false);
         }
     }
+
+    async function handleGoogle() {
+        setGoogleLoading(true);
+        setAuthError("");
+        try {
+            await signInWithGoogle();
+            onLogin?.();
+        } catch (err: unknown) {
+            const code = (err as { code?: string })?.code ?? "";
+            if (code !== "auth/popup-closed-by-user") {
+                setAuthError("Google sign-in failed. Please try again.");
+            }
+        } finally {
+            setGoogleLoading(false);
+        }
+    }
+
+    const mockUsers = IS_DEV ? getMockUsers() : [];
 
     return (
         <div className="flex min-h-screen items-center justify-center px-4 py-12">
@@ -249,7 +277,7 @@ export function Login({ onLogin }: { onLogin?: () => void }) {
                             type="submit"
                             variant="primary"
                             className="mt-6 w-full"
-                            disabled={loading}
+                            disabled={loading || googleLoading}
                         >
                             {loading ? (
                                 <span className="flex items-center gap-2">
@@ -279,16 +307,66 @@ export function Login({ onLogin }: { onLogin?: () => void }) {
                         <div className="h-px flex-1 bg-white/8" />
                     </div>
 
-                    {/* Social / SSO */}
-                    <Button variant="secondary" className="w-full">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
-                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
-                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
-                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
-                        </svg>
-                        Continue with Google
+                    {/* Google sign-in */}
+                    <Button
+                        variant="secondary"
+                        className="w-full"
+                        disabled={loading || googleLoading}
+                        onClick={handleGoogle}
+                    >
+                        {googleLoading ? (
+                            <span className="flex items-center gap-2">
+                                <svg
+                                    className="animate-spin"
+                                    width="15"
+                                    height="15"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2.5"
+                                >
+                                    <path d="M21 12a9 9 0 1 1-6.219-8.56" strokeLinecap="round" />
+                                </svg>
+                                Connecting…
+                            </span>
+                        ) : (
+                            <>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
+                                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
+                                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
+                                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
+                                </svg>
+                                Continue with Google
+                            </>
+                        )}
                     </Button>
+
+                    {/* Dev-mode mock user hints */}
+                    {IS_DEV && mockUsers.length > 0 && (
+                        <div className="mt-5 rounded-2xl border border-sky-500/20 bg-sky-500/5 px-4 py-3">
+                            <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-sky-400">
+                                Dev — mock accounts
+                            </p>
+                            <ul className="space-y-1">
+                                {mockUsers.map((u) => (
+                                    <li key={u.email}>
+                                        <button
+                                            type="button"
+                                            className="text-left text-xs text-slate-400 hover:text-slate-200 transition"
+                                            onClick={() =>
+                                                setFields((f) => ({ ...f, email: u.email }))
+                                            }
+                                        >
+                                            <span className="text-slate-300">{u.displayName}</span>
+                                            {" · "}
+                                            {u.email}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </Card>
 
                 {/* Footer link */}
