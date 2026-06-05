@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Badge } from "../../../components/base/Badge";
 import { BasePageLayout } from "../../../components/layout/BasePageLayout";
 import { useNavigate } from "react-router";
-import { Lightbulb, Radio, Video, Plug, Thermometer, Ellipsis } from 'lucide-react';
 import { SearchDeviceLayout } from "~/components/layout/SearchDeviceLayout";
 import { AddDevicePageLayout } from "~/components/layout/AddDeviceLayout";
+import { ConfigureDeviceLayout } from "~/components/layout/ConfigureDeviceLayout";
 
 const navItems = [
     { label: "Dashboard", active: true, icon: "▣" },
@@ -28,19 +28,11 @@ export function AddDevice() {
         >
             {/* ── Page Header ── */}
             <header className="hidden lg:flex lg:flex-row lg:items-start lg:justify-between gap-6 border-b border-white/6 pb-6 mb-6">
-                <div>
-                    <p className="text-sm font-medium text-slate-400">Home Sweet Home</p>
-                    <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white">
-                        Witaj w domu, Alex.
-                    </h1>
-                    <p className="mt-4 max-w-2xl text-base leading-6 text-slate-400">
-                        Dodaj urządzenie
-                    </p>
-                </div>
             </header>
 
             <AddDevicePageLayout/>
             <SearchDeviceLayout/>
+            <ConfigureDeviceLayout/>
 
             {/* ── Mobile Page Header ── */}
             <div className="mb-5 lg:hidden">
