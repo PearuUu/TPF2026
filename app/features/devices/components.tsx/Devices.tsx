@@ -6,9 +6,9 @@ import { Card } from "../../../components/base/Card";
 import { SectionHeader } from "../../../components/base/SectionHeader";
 import { Toggle } from "../../../components/base/Toggle";
 import { BasePageLayout } from "../../../components/layout/BasePageLayout";
-import { DevicePageLayout } from "../../../components/layout/DevicePageLayout"
 import AddDeviceButton from "~/components/base/AddDeviceButton";
 import { useNavigate } from "react-router";
+import DevicePageLayout from "~/components/layout/DevicePageLayout";
 
 const navItems = [
     { label: "Dashboard", active: true, icon: "▣" },
@@ -32,15 +32,6 @@ export function Devices() {
         >
             {/* ── Page Header ── */}
             <header className="hidden lg:flex lg:flex-row lg:items-start lg:justify-between gap-6 border-b border-white/6 pb-6 mb-6">
-                <div>
-                    <p className="text-sm font-medium text-slate-400">Home Sweet Home</p>
-                    <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white">
-                        Witaj w domu, Alex.
-                    </h1>
-                    <p className="mt-4 max-w-2xl text-base leading-6 text-slate-400">
-                        Urządzenia
-                    </p>
-                </div>
             </header>
 
             <DevicePageLayout/>

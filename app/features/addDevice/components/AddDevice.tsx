@@ -3,8 +3,8 @@ import { Badge } from "../../../components/base/Badge";
 import { BasePageLayout } from "../../../components/layout/BasePageLayout";
 import { useNavigate } from "react-router";
 import { Lightbulb, Radio, Video, Plug, Thermometer, Ellipsis } from 'lucide-react';
-import DeviceType from "~/components/base/DeviceType";
-import { DevicePageLayout } from "~/components/layout/DevicePageLayout";
+import { SearchDeviceLayout } from "~/components/layout/SearchDeviceLayout";
+import { AddDevicePageLayout } from "~/components/layout/AddDeviceLayout";
 
 const navItems = [
     { label: "Dashboard", active: true, icon: "▣" },
@@ -39,53 +39,8 @@ export function AddDevice() {
                 </div>
             </header>
 
-            <DevicePageLayout/>
-
-            {/* <div className="bg-[#2D3449] min-h-screen p-6 md:p-12 flex justify-center items-center">
-                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 max-w-[1400px] w-full">
-                    <DeviceType 
-                        title="Oświetlenie"
-                        content="Żarównki, taśmy led, panele"
-                        Icon={Lightbulb}
-                        initialState={false}
-                    />
-
-                    <DeviceType 
-                        title="Czujnik"
-                        content="Ruch, dym, zalanie, CO2"
-                        Icon={Radio}
-                        initialState={false}
-                    />
-
-                    <DeviceType 
-                        title="Kamera"
-                        content="Monitoring, dzwonek video"
-                        Icon={Video}
-                        initialState={true}
-                    />
-
-                    <DeviceType 
-                        title="Gniezdko"
-                        content="Smart plug'i i listwy"
-                        Icon={Plug}
-                        initialState={false}
-                    />
-
-                    <DeviceType 
-                        title="Klimat"
-                        content="Termostaty, nawilzacze"
-                        Icon={Thermometer}
-                        initialState={false}
-                    />
-
-                    <DeviceType 
-                        title="Inne"
-                        content="Ustawienia niestandardowe"
-                        Icon={Ellipsis}
-                        initialState={false}
-                    />
-                </div>
-            </div> */}
+            <AddDevicePageLayout/>
+            <SearchDeviceLayout/>
 
             {/* ── Mobile Page Header ── */}
             <div className="mb-5 lg:hidden">
