@@ -1,16 +1,12 @@
 import React from 'react';
-import DeviceCard from '../base/DeviceCard'; // Twój uniwersalny komponent karty
+import DeviceCard from '../base/DeviceCard';
 import MonitoringCard from '../base/MonitoringCard';
 import { Lightbulb, Snowflake, Tv, Coffee, Speaker, Bot } from 'lucide-react';
 
-export function DevicePageLayout() {
+export default function DevicePageLayout() {
   return (
-    <div className="min-h-screen bg-[#0f111a] p-6 md:p-12 flex justify-center items-center">
-      {/* Kontener siatki (Grid) dopasowany do ekranów */}
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1400px] w-full"> */}
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1400px] w-full"> */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 max-w-[1400px] w-full">
-        
+    <div className="min-h-screen p-6 md:p-12 flex justify-center items-center">
+      <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-4 gap-6 max-w-[1400px] w-full">
         {/* RZĄD 1 */}
         <DeviceCard 
           location="Salon"
@@ -65,7 +61,6 @@ export function DevicePageLayout() {
           Icon={Bot}
           initialState={true}
         />
-
       </div>
     </div>
   );

@@ -1,14 +1,10 @@
 import { useState } from "react";
-import { Avatar } from "../../../components/base/Avatar";
 import { Badge } from "../../../components/base/Badge";
-import { Button } from "../../../components/base/Button";
-import { Card } from "../../../components/base/Card";
-import { SectionHeader } from "../../../components/base/SectionHeader";
-import { Toggle } from "../../../components/base/Toggle";
 import { BasePageLayout } from "../../../components/layout/BasePageLayout";
-import AddDeviceButton from "~/components/base/AddDeviceButton";
 import { useNavigate } from "react-router";
-import DevicePageLayout from "~/components/layout/DevicePageLayout";
+import { SearchDeviceLayout } from "~/components/layout/SearchDeviceLayout";
+import { AddDevicePageLayout } from "~/components/layout/AddDeviceLayout";
+import { ConfigureDeviceLayout } from "~/components/layout/ConfigureDeviceLayout";
 
 const navItems = [
     { label: "Dashboard", active: true, icon: "▣" },
@@ -19,7 +15,7 @@ const navItems = [
 
 const energyBars = [34, 46, 38, 60, 88, 56, 42, 30, 35, 49, 44, 28];
 
-export function Devices() {
+export function AddDevice() {
     const navigate = useNavigate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -34,8 +30,9 @@ export function Devices() {
             <header className="hidden lg:flex lg:flex-row lg:items-start lg:justify-between gap-6 border-b border-white/6 pb-6 mb-6">
             </header>
 
-            <DevicePageLayout/>
-            <AddDeviceButton onClick={()=> {navigate("/addDevice")}}/>
+            <AddDevicePageLayout/>
+            <SearchDeviceLayout/>
+            <ConfigureDeviceLayout/>
 
             {/* ── Mobile Page Header ── */}
             <div className="mb-5 lg:hidden">
