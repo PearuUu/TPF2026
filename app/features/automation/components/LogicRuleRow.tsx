@@ -12,9 +12,10 @@ type LogicRuleRowProps = {
     status: "RUNNING" | "PAUSED";
     conditions: Condition[];
     actions: string[];
+    onEdit?: () => void;
 };
 
-export function LogicRuleRow({ title, status, conditions, actions }: LogicRuleRowProps) {
+export function LogicRuleRow({ title, status, conditions, actions, onEdit }: LogicRuleRowProps) {
     const isRunning = status === "RUNNING";
 
     return (
@@ -57,7 +58,10 @@ export function LogicRuleRow({ title, status, conditions, actions }: LogicRuleRo
 
             {/* Action Buttons */}
             <div className="flex items-center gap-2 pl-4 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
-                <button className="p-2 text-slate-400 hover:text-white transition-colors">
+                <button 
+                    onClick={onEdit}
+                    className="p-2 text-slate-400 hover:text-white transition-colors cursor-pointer"
+                >
                     <Pencil size={16} />
                 </button>
                 <button className="p-2 text-slate-400 hover:text-white transition-colors">
@@ -67,3 +71,4 @@ export function LogicRuleRow({ title, status, conditions, actions }: LogicRuleRo
         </div>
     );
 }
+
