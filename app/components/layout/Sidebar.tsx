@@ -5,12 +5,30 @@ import { NavItem } from "./NavItem";
 import { useNavigate } from "react-router";
 import { useLocation } from 'react-router'
 
-import { LayoutGrid, MonitorSmartphone, Bot, Settings as SettingsIcon } from "lucide-react";
+import { LayoutGrid, MonitorSmartphone, Bot, Settings as SettingsIcon, Bell } from "lucide-react";
+import { notifications } from "../../features/notifications/mock";
+
+const unreadCount = notifications.filter((n) => !n.read).length;
 
 const navItems = [
     { label: "Dashboard", active: false, icon: <LayoutGrid size={18} />, direction: "" },
     { label: "Devices", active: true, icon: <MonitorSmartphone size={18} />, direction: "devices" },
     { label: "Automation", active: false, icon: <Bot size={18} />, direction: "automation" },
+    {
+        label: "Notifications",
+        active: false,
+        icon: (
+            <span className="relative">
+                <Bell size={18} />
+                {unreadCount > 0 && (
+                    <span className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-rose-500 text-[9px] font-bold text-white">
+                        {unreadCount}
+                    </span>
+                )}
+            </span>
+        ),
+        direction: "notifications",
+    },
     { label: "Settings", active: false, icon: <SettingsIcon size={18} />, direction: "settings" },
 ];
 
@@ -40,9 +58,9 @@ export function Sidebar({
     onNavItemClick,
     appName = "Concierge",
     appStatus = "System active",
-    tipTitle = "Wskazówka od Concierge",
+    tipTitle = "Concierge Tip",
     tipDescription,
-    tipButtonLabel = "Optymalizuj teraz",
+    tipButtonLabel = "Optimise now",
     onTipButtonClick,
 }: SidebarProps) {
     const navigate = useNavigate();

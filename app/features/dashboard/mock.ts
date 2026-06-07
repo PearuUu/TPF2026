@@ -7,53 +7,53 @@ import type {
 
 export const dashboardStats: DashboardStat[] = [
     {
-        label: "Temperatura",
+        label: "Temperature",
         value: "22.5°C",
-        sublabel: "+1.2° vs wczoraj",
+        sublabel: "+1.2° vs yesterday",
     },
     {
-        label: "Wilgotność",
+        label: "Humidity",
         value: "48%",
-        sublabel: "Stan optymalny",
+        sublabel: "Optimal level",
     },
     {
-        label: "Aktywne",
+        label: "Active",
         value: "12",
-        sublabel: "Pobór: 1.2 kWh",
+        sublabel: "Usage: 1.2 kWh",
     },
     {
-        label: "Bezpieczeństwo",
-        value: "Uzbrojone",
-        sublabel: "Wszystkie strefy zamknięte",
+        label: "Security",
+        value: "Armed",
+        sublabel: "All zones secured",
     },
 ];
 
 export const favoriteDevices: FavoriteDevice[] = [
     {
-        name: "Salon - Oświetlenie",
-        location: "Jasność: 80%",
-        detail: "Aktywne teraz",
+        name: "Living Room – Lighting",
+        location: "Brightness: 80%",
+        detail: "Active now",
         active: true,
         tone: "emerald",
     },
     {
-        name: "Klimatyzacja - Sypialnia",
-        location: "Tryb: Włączony",
-        detail: "Cicha praca",
+        name: "Air Conditioning – Bedroom",
+        location: "Mode: On",
+        detail: "Silent mode",
         active: false,
         tone: "slate",
     },
     {
-        name: "Smart TV - Salon",
-        location: "Oglądasz: Netflix",
-        detail: "Pauza",
+        name: "Smart TV – Living Room",
+        location: "Watching: Netflix",
+        detail: "Paused",
         active: false,
         tone: "indigo",
     },
     {
-        name: "Audio - Cały Dom",
-        location: "Głośność: 35%",
-        detail: "Muzyka w tle",
+        name: "Audio – Whole Home",
+        location: "Volume: 35%",
+        detail: "Background music",
         active: true,
         tone: "violet",
     },
@@ -61,26 +61,26 @@ export const favoriteDevices: FavoriteDevice[] = [
 
 export const activities: ActivityItem[] = [
     {
-        title: "Brama wjazdowa otwarta",
-        detail: "10 min temu · Smart Gate Pro",
+        title: "Entry gate opened",
+        detail: "10 min ago · Smart Gate Pro",
     },
     {
-        title: "Uruchomiono tryb 'Kino'",
-        detail: "45 min temu · Scena",
+        title: "Cinema mode activated",
+        detail: "45 min ago · Scene",
     },
     {
-        title: "Zakończono pranie",
-        detail: "1 godz temu · Pralka WiFi",
+        title: "Laundry cycle complete",
+        detail: "1 hr ago · WiFi Washing Machine",
     },
     {
-        title: "Wykryto brak osób w kuchni",
-        detail: "2 godz temu · Czujnik ruchu",
+        title: "No motion detected in kitchen",
+        detail: "2 hrs ago · Motion Sensor",
     },
 ];
 
 export const quickActions: QuickAction[] = [
-    { label: "Dobranoc", icon: "☾" },
-    { label: "Dzień dobry", icon: "☼" },
-    { label: "Wyjazd", icon: "➜" },
-    { label: "Impreza", icon: "◎" },
+    { label: "Good Night", icon: "☾" },
+    { label: "Good Morning", icon: "☼" },
+    { label: "Leaving Home", icon: "➜" },
+    { label: "Party Mode", icon: "◎" },
 ];
