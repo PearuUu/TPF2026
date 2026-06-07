@@ -5,59 +5,59 @@ import { Lightbulb, Snowflake, Tv, Coffee, Speaker, Bot } from 'lucide-react';
 
 export default function DevicePageLayout() {
   return (
-    <div className="min-h-screen p-6 md:p-12 flex justify-center items-center">
+    <div className="min-h-screen flex justify-center items-center">
       <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-4 gap-6 max-w-[1400px] w-full">
         {/* RZĄD 1 */}
         <DeviceCard 
-          location="Salon"
-          title="Oświetlenie główne"
-          activeStatusText="80% jasności"
+          location="Living room"
+          title="Main lighting"
+          activeStatusText="80% brightness"
           Icon={Lightbulb}
           initialState={true}
         />
 
         <DeviceCard 
-          location="Sypialnia"
-          title="Klimatyzacja"
-          activeStatusText="Chłodzenie • 21°C"
+          location="Bedroom"
+          title="Air conditioning"
+          activeStatusText="Cooling • 21°C"
           Icon={Snowflake}
           initialState={true}
         />
 
         <DeviceCard 
-          location="Salon"
+          location="Living room"
           title="Smart TV 4K"
-          activeStatusText="Tryb czuwania"
+          activeStatusText="Standby mode"
           Icon={Tv}
           initialState={false}
         />
 
-        {/* Puste miejsce w pierwszym rzędzie na screenie zostawiamy wolne, Grid automatycznie ułoży kolejne elementy */}
+        {/* We leave the empty space from the screenshot row 1 free; Grid will automatically arrange the next elements */}
 
-        {/* RZĄD 2 */}
+        {/* ROW 2 */}
         <MonitoringCard />
 
         <DeviceCard 
-          location="Kuchnia"
-          title="Ekspres do kawy"
-          activeStatusText="Gotowy • Woda: 75%"
+          location="Kitchen"
+          title="Coffee maker"
+          activeStatusText="Ready • Water: 75%"
           Icon={Coffee}
           initialState={true}
         />
 
         <DeviceCard 
-          location="Łazienka"
-          title="Głośnik Smart"
-          activeStatusText="Rozłączony"
+          location="Bathroom"
+          title="Smart speaker"
+          activeStatusText="Disconnected"
           Icon={Speaker}
           initialState={false}
         />
 
-        {/* RZĄD 3 */}
+        {/* ROW 3 */}
         <DeviceCard 
-          location="Cały dom"
-          title="Robot sprzątający"
-          activeStatusText="Sprzątanie • Bateria: 92%"
+          location="Entire house"
+          title="Robot vacuum"
+          activeStatusText="Cleaning • Battery: 92%"
           Icon={Bot}
           initialState={true}
         />

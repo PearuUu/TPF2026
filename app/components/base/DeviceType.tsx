@@ -45,7 +45,7 @@ export default function DeviceType({ title, content, Icon, initialState = false,
       </div>
 
       {/* Dolna sekcja: Teksty informacyjne zepchnięte w dół przez mt-auto */}
-      <div className="flex flex-col gap-2 mt-auto text-left">
+      <div className="flex flex-col gap-2 mt-3 text-left">
         <h2 className="text-white text-3xl font-semibold tracking-wide">
           {title}
         </h2>
