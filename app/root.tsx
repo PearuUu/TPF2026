@@ -33,7 +33,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-        
+
         <script src="https://t.contentsquare.net/uxa/969452c80de23.js" async></script>
 
         {gaId && (

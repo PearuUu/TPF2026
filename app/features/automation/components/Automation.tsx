@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { AddAutomationModal } from "./AddAutomationModal";
 import { Badge } from "../../../components/base/Badge";
 import { Button } from "../../../components/base/Button";
 import { Toggle } from "../../../components/base/Toggle";
 import { BasePageLayout } from "../../../components/layout/BasePageLayout";
 import { SceneCard } from "./SceneCard";
 import { LogicRuleRow } from "./LogicRuleRow";
-import { Tv, Moon, Zap, UserPlus, Plus, Clapperboard, Sun, Lightbulb, MapPin, Lock, Thermometer, ArrowRight, LayoutGrid, MonitorSmartphone, Bot, Settings as SettingsIcon } from "lucide-react";
+import { Tv, Moon, Zap, UserPlus, Plus, Clapperboard, Sun, Lightbulb, MapPin, Lock, Thermometer, ArrowRight, LayoutGrid, MonitorSmartphone, Bot, Settings as SettingsIcon, Pencil } from "lucide-react";
 
 const navItems = [
     { label: "Dashboard", active: false, icon: <LayoutGrid size={18} /> },
@@ -51,13 +52,16 @@ function MobileSceneCard({ scene, onToggle }: any) {
     );
 }
 
-function MobileLogicRuleRow({ rule, onToggle }: any) {
+function MobileLogicRuleRow({ rule, onToggle, onEdit }: any) {
     const isRunning = rule.status === "RUNNING";
     return (
         <div className={`flex flex-col p-4 bg-slate-900/80 rounded-xl border-l-4 ${isRunning ? "border-emerald-500" : "border-slate-700"}`}>
             <div className="flex justify-between items-start mb-4">
-                <div>
-                    <h3 className="text-base font-semibold text-white">{rule.title}</h3>
+                <div className="flex-1 cursor-pointer" onClick={onEdit}>
+                    <div className="flex items-center gap-2">
+                        <h3 className="text-base font-semibold text-white">{rule.title}</h3>
+                        <Pencil size={13} className="text-slate-400" />
+                    </div>
                     <p className="text-xs text-slate-400 mt-0.5">{rule.subtitle}</p>
                 </div>
                 <div onClick={onToggle} className="cursor-pointer">
@@ -89,11 +93,68 @@ export function Automation() {
     const [mobileScenes, setMobileScenes] = useState(MOBILE_SCENES_MOCK);
     const [mobileRules, setMobileRules] = useState(MOBILE_RULES_MOCK);
 
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+    const [editingRule, setEditingRule] = useState<any>(null);
+
+    const triggerEditRule = (rule: any) => {
+        setEditingRule(rule);
+        setIsAddModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsAddModalOpen(false);
+        setEditingRule(null);
+    };
+
     const toggleScene = (id: number) => setScenes(scenes.map((s) => (s.id === id ? { ...s, active: !s.active } : s)));
     const filteredRules = rules.filter((r) => ruleFilter === "Active" ? r.status === "RUNNING" : true);
 
     const toggleMobileScene = (id: number) => setMobileScenes(mobileScenes.map((s) => (s.id === id ? { ...s, active: !s.active } : s)));
     const toggleMobileRule = (id: number) => setMobileRules(mobileRules.map((r) => (r.id === id ? { ...r, status: r.status === "RUNNING" ? "PAUSED" : "RUNNING" } : r)));
+
+    const handleAddRule = (newRule: any) => {
+        const nextId = Math.max(...rules.map((r) => r.id), 0) + 1;
+        setRules([
+            ...rules,
+            {
+                id: nextId,
+                title: newRule.title,
+                status: newRule.status,
+                conditions: newRule.conditions,
+                actions: newRule.actions,
+            },
+        ]);
+
+        const nextMobileId = Math.max(...mobileRules.map((r) => r.id), 0) + 1;
+        setMobileRules([
+            ...mobileRules,
+            {
+                id: nextMobileId,
+                title: newRule.title,
+                subtitle: newRule.conditions[0].text,
+                status: newRule.status,
+                conditions: newRule.conditions.map((c: any) => ({ text: c.text })),
+                actions: newRule.actions.map((a: any) => ({ text: a })),
+            },
+        ]);
+    };
+
+    const handleEditRule = (updatedRule: any) => {
+        setRules(rules.map((r) => r.id === updatedRule.id ? updatedRule : r));
+
+        setMobileRules(mobileRules.map((mr) => {
+            if (mr.id === updatedRule.id) {
+                return {
+                    ...mr,
+                    title: updatedRule.title,
+                    subtitle: updatedRule.conditions[0].text,
+                    conditions: updatedRule.conditions.map((c: any) => ({ text: c.text })),
+                    actions: updatedRule.actions.map((a: any) => ({ text: a })),
+                };
+            }
+            return mr;
+        }));
+    };
 
     return (
         <BasePageLayout
@@ -108,9 +169,6 @@ export function Automation() {
                     <div>
                         <h1 className="text-3xl font-bold tracking-tight text-white mb-1">Automation Flow</h1>
                         <p className="text-sm text-slate-400">Configure intelligent routines and ambient behaviors for your environment.</p>
-                    </div>
-                    <div>
-                        <Button variant="primary" icon={<Plus size={16} />}>Create New Automation</Button>
                     </div>
                 </header>
 
@@ -139,7 +197,14 @@ export function Automation() {
                     </div>
                     <div className="flex flex-col gap-3">
                         {filteredRules.map((rule) => (
-                            <LogicRuleRow key={rule.id} title={rule.title} status={rule.status} conditions={rule.conditions} actions={rule.actions} />
+                            <LogicRuleRow 
+                                key={rule.id} 
+                                title={rule.title} 
+                                status={rule.status} 
+                                conditions={rule.conditions} 
+                                actions={rule.actions} 
+                                onEdit={() => triggerEditRule(rule)}
+                            />
                         ))}
                     </div>
                 </section>
@@ -163,16 +228,41 @@ export function Automation() {
                     <p className="text-sm text-slate-400 mb-4">Logic flows and routines.</p>
                     <div className="flex flex-col gap-4">
                         {mobileRules.map((rule) => (
-                            <MobileLogicRuleRow key={rule.id} rule={rule} onToggle={() => toggleMobileRule(rule.id)} />
+                            <MobileLogicRuleRow 
+                                key={rule.id} 
+                                rule={rule} 
+                                onToggle={() => toggleMobileRule(rule.id)} 
+                                onEdit={() => {
+                                    const desktopRule = rules.find((r) => r.id === rule.id) || {
+                                        id: rule.id,
+                                        title: rule.title,
+                                        status: rule.status,
+                                        conditions: rule.conditions.map((c: any) => ({ text: c.text })),
+                                        actions: rule.actions.map((a: any) => typeof a === "string" ? a : a.text)
+                                    };
+                                    triggerEditRule(desktopRule);
+                                }}
+                            />
                         ))}
                     </div>
                 </section>
-                <div className="fixed bottom-0 left-0 right-0 p-4 bg-slate-950/80 backdrop-blur-lg border-t border-white/5 z-10">
-                    <button className="w-full py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-lg flex justify-center items-center gap-2 transition-colors">
-                        <span className="text-2xl leading-none font-normal">+</span> Add Automation
-                    </button>
-                </div>
             </div>
+            {/* Unified Floating Action Button (FAB) */}
+            <button
+                onClick={() => setIsAddModalOpen(true)}
+                className="fixed bottom-8 right-8 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none"
+                aria-label="Dodaj automatyzację"
+            >
+                <Plus size={26} />
+            </button>
+
+            <AddAutomationModal
+                isOpen={isAddModalOpen}
+                onClose={handleCloseModal}
+                onAdd={handleAddRule}
+                onEdit={handleEditRule}
+                editingRule={editingRule}
+            />
         </BasePageLayout>
     );
 }

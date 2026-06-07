@@ -43,3 +43,41 @@ textarea,
 select {
   font: inherit;
 }
+
+/* Custom styling for react-day-picker */
+.rdp {
+  --rdp-cell-size: 38px;
+  --rdp-accent-color: #10b981;
+  --rdp-background-color: #10b981;
+  margin: 0 auto;
+}
+.rdp-day_selected, 
+.rdp-day_selected:focus-visible, 
+.rdp-day_selected:hover {
+  background-color: #10b981 !important;
+  color: #0f172a !important;
+  font-weight: 700;
+  border-radius: 12px;
+}
+.rdp-day {
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+.rdp-day:hover:not(.rdp-day_selected) {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+}
+.rdp-button:hover:not([disabled]) {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+.rdp-nav_button {
+  color: #94a3b8 !important;
+}
+.rdp-nav_button:hover {
+  color: #ffffff !important;
+}
+.rdp-head_cell {
+  color: #64748b !important;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
