@@ -65,7 +65,7 @@ export default function DeviceCard({ location, title, activeStatusText, Icon, in
           isActive ? 'bg-[#4ade80]' : 'bg-[#5d637c]'
         }`} />
         <p className="opacity-80">
-          {isActive ? `Aktywne • ${activeStatusText}` : 'Nieaktywne'}
+          {isActive ? `Active • ${activeStatusText}` : 'Inactive'}
         </p>
       </div>
 
