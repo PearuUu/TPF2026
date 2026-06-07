@@ -8,7 +8,7 @@ interface CategoryFilterProps {
 
 export default function CategoryFilter({ onCategoryChange, onSortChange }: CategoryFilterProps) {
   // Lista kategorii/pokoi pobrana ze zdjęcia
-  const categories = ['All', 'Living Room', 'Kitchen', 'Bathroom', 'Bedroom'];
+  const categories = ['All', 'Living room', 'Kitchen', 'Bathroom', 'Bedroom'];
   
   // Stan dla aktywnej zakładki
   const [activeCategory, setActiveCategory] = useState('All');
