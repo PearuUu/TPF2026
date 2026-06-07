@@ -16,7 +16,8 @@ const energyBars = [34, 46, 38, 60, 88, 56, 42, 30, 35, 49, 44, 28];
 
 export function Devices() {
     const navigate = useNavigate();
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState<string>('All');
+    const [selectedSort, setSelectedSort] = useState<string>('Status'); // Domyślnie sortujemy po statusie
 
     return (
         <BasePageLayout
@@ -29,8 +30,14 @@ export function Devices() {
             <header className="hidden lg:flex lg:flex-row lg:items-start lg:justify-between gap-6 border-b border-white/6 pb-6 mb-6">
             </header>
 
-            <CategoryFilter/>
-            <DevicePageLayout/>
+            <CategoryFilter
+                onCategoryChange={(category) => setSelectedCategory(category)}
+                onSortChange={(sortBy) => setSelectedSort(sortBy)}
+            />
+            <DevicePageLayout
+                activeCategory={selectedCategory}
+                sortBy={selectedSort}
+                />
             <AddDeviceButton onClick={()=> {navigate("/addDevice")}}/>
 
         </BasePageLayout>
