@@ -1,14 +1,9 @@
 import { useState } from "react";
-import { Avatar } from "../../../components/base/Avatar";
-import { Badge } from "../../../components/base/Badge";
-import { Button } from "../../../components/base/Button";
-import { Card } from "../../../components/base/Card";
-import { SectionHeader } from "../../../components/base/SectionHeader";
-import { Toggle } from "../../../components/base/Toggle";
 import { BasePageLayout } from "../../../components/layout/BasePageLayout";
 import AddDeviceButton from "~/components/base/AddDeviceButton";
 import { useNavigate } from "react-router";
 import DevicePageLayout from "~/components/layout/DevicePageLayout";
+import CategoryFilter from "~/components/base/CategoryFilter";
 
 const navItems = [
     { label: "Dashboard", active: true, icon: "▣" },
@@ -21,7 +16,8 @@ const energyBars = [34, 46, 38, 60, 88, 56, 42, 30, 35, 49, 44, 28];
 
 export function Devices() {
     const navigate = useNavigate();
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState<string>('All');
+    const [selectedSort, setSelectedSort] = useState<string>('Status'); // Domyślnie sortujemy po statusie
 
     return (
         <BasePageLayout
@@ -34,23 +30,15 @@ export function Devices() {
             <header className="hidden lg:flex lg:flex-row lg:items-start lg:justify-between gap-6 border-b border-white/6 pb-6 mb-6">
             </header>
 
-            <DevicePageLayout/>
+            <CategoryFilter
+                onCategoryChange={(category) => setSelectedCategory(category)}
+                onSortChange={(sortBy) => setSelectedSort(sortBy)}
+            />
+            <DevicePageLayout
+                activeCategory={selectedCategory}
+                sortBy={selectedSort}
+                />
             <AddDeviceButton onClick={()=> {navigate("/addDevice")}}/>
-
-            {/* ── Mobile Page Header ── */}
-            <div className="mb-5 lg:hidden">
-                <p className="text-xs font-medium text-slate-400">Home Sweet Home</p>
-                <h1 className="mt-1.5 text-2xl font-semibold tracking-tight text-white">
-                    Witaj w domu, Alex.
-                </h1>
-                <div className="mt-3 flex flex-wrap items-center gap-2">
-                    <Badge tone="emerald">Wszystkie systemy aktywne</Badge>
-                    <div className="flex items-center gap-1.5 rounded-full border border-white/8 bg-white/5 px-2.5 py-1.5 text-xs text-slate-300">
-                        <span className="text-emerald-400">●</span>
-                        72°F · Clear
-                    </div>
-                </div>
-            </div>
 
         </BasePageLayout>
     );

@@ -34,21 +34,6 @@ export function AddDevice() {
             <SearchDeviceLayout/>
             <ConfigureDeviceLayout/>
 
-            {/* ── Mobile Page Header ── */}
-            <div className="mb-5 lg:hidden">
-                <p className="text-xs font-medium text-slate-400">Home Sweet Home</p>
-                <h1 className="mt-1.5 text-2xl font-semibold tracking-tight text-white">
-                    Witaj w domu, Alex.
-                </h1>
-                <div className="mt-3 flex flex-wrap items-center gap-2">
-                    <Badge tone="emerald">Wszystkie systemy aktywne</Badge>
-                    <div className="flex items-center gap-1.5 rounded-full border border-white/8 bg-white/5 px-2.5 py-1.5 text-xs text-slate-300">
-                        <span className="text-emerald-400">●</span>
-                        72°F · Clear
-                    </div>
-                </div>
-            </div>
-
         </BasePageLayout>
     );
 }

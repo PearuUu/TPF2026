@@ -1,5 +1,8 @@
 import { Link } from "react-router";
 import { Avatar } from "../base/Avatar";
+import { notifications } from "../../features/notifications/mock";
+
+const unreadCount = notifications.filter((n) => !n.read).length;
 
 export function Header() {
     return (
@@ -89,8 +92,12 @@ export function Header() {
                     </span>
                 </div>
 
-                {/* Notification Bell */}
-                <button className="relative p-2 text-slate-300 hover:text-white transition">
+                {/* Notification Bell – navigates to /notifications */}
+                <Link
+                    to="/notifications"
+                    className="relative p-2 text-slate-300 hover:text-white transition rounded-xl hover:bg-white/8"
+                    aria-label="Notifications"
+                >
                     <svg
                         className="w-6 h-6"
                         fill="none"
@@ -104,7 +111,12 @@ export function Header() {
                             d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
                         />
                     </svg>
-                </button>
+                    {unreadCount > 0 && (
+                        <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-rose-500 text-[9px] font-bold text-white shadow-[0_0_8px_rgba(244,63,94,0.6)]">
+                            {unreadCount}
+                        </span>
+                    )}
+                </Link>
 
                 {/* Avatar */}
                 <Link to="/settings" className="rounded-full overflow-hidden hover:ring-2 hover:ring-emerald-500 transition-all flex items-center justify-center">
