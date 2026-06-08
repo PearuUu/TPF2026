@@ -1,87 +1,200 @@
-# Welcome to React Router!
+# 🏰 System Zarządzania Inteligentnym Domem (Smart Home)
 
-A modern, production-ready template for building full-stack React applications using React Router.
+Nowoczesna, responsywna aplikacja internetowa klasy premium służąca do monitorowania, sterowania oraz automatyzacji ekosystemu inteligentnego domu. Aplikacja została zaprojektowana z zachowaniem najwyższych standardów estetycznych (stylistyka dark mode, dynamiczne mikro-animacje, szklane tła *glassmorphism* oraz płynne przejścia) i optymalizacji SEO oraz wydajności.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+W projekt wbudowano kompleksową analitykę zachowań użytkowników (**Google Analytics 4**) oraz monitoring interakcji i ścieżek użytkowników (**Hotjar / Contentsquare**).
 
-## Features
+---
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+## 🛠️ Stos Technologiczny
 
-## Getting Started
+* **Szkielet Aplikacji**: [React Router v7](https://reactrouter.com/) (z obsługą renderowania po stronie serwera oraz automatycznego odświeżania modułów)
+* **Wersja React**: React 19 (z pełnym typowaniem TypeScript)
+* **Stylizowanie**: Tailwind CSS v4 (nowoczesna i wydajna architektura CSS)
+* **Zarządzanie Stanem i Logika**: React Hooks (State, Effect, Memo, Callback)
+* **Uwierzytelnianie**: Firebase Authentication (SDK v12) z wbudowanym mechanizmem automatycznego przejścia na dane demonstracyjne w trybie offline lub przy braku kluczy
+* **Analityka i Rejestracja interakcji**: Google Analytics oraz skrypt Contentsquare/Hotjar
 
-### Installation
+---
 
-Install the dependencies:
+## 🌟 Główne Funkcjonalności
 
+1. **Autoryzacja**:
+   * Logowanie i rejestracja za pomocą adresu e-mail i hasła.
+   * Integracja z Firebase oraz elastyczny tryb demonstracyjny (dla szybkich testów interfejsu i doświadczeń użytkownika).
+2. **Panel Główny**:
+   * Podgląd kluczowych metryk (aktywne urządzenia, temperatura, zużycie energii elektrycznej w czasie rzeczywistym).
+   * Interaktywny i dynamiczny wykres zużycia energii elektrycznej z ostatnich 24 godzin.
+   * Szybkie akcje do natychmiastowego wyzwalania predefiniowanych stanów domu.
+   * Ostatnie aktywności — czytelna oś czasu informująca o zdarzeniach systemowych.
+3. **Zarządzanie Urządzeniami**:
+   * Wykaz wszystkich urządzeń podzielonych na strefy i pokoje.
+   * Kontrola stanu urządzeń (włączanie/wyłączanie, zmiana parametrów jasności lub temperatury).
+   * Kreator dodawania nowych urządzeń do sieci domowej.
+4. **Automatyzacja i Reguły Logiczne**:
+   * Wyzwalanie predefiniowanych scen (np. *Movie Time*, *Good Night*, *Deep Focus*, *Away Mode*).
+   * Zaawansowany kreator reguł oparty na strukturze logicznej **IF [Condition] -> THEN [Action]**.
+   * Obsługa wielu warunków logicznych (AND/OR), czasu, lokalizacji oraz progów czujników.
+5. **Ustawienia**:
+   * Konfiguracja profilu domownika, parametrów środowiskowych i strefy czasowej, zarządzania dostępem mieszkańców i gości oraz weryfikacji integralności i wersji systemu.
+6. **Katalog Komponentów**:
+   * Strona prezentująca wszystkie bazowe klocki interfejsu (przyciski, przełączniki, badge, karty, awatary) używane w systemie.
+7. **Powiadomienia**:
+   * Otrzymywanie i filtrowanie powiadomień systemowych podzielonych na kategorie takie jak bezpieczeństwo, automatyzacja, stan urządzeń, zużycie energii i komunikaty systemowe.
+
+---
+
+## 📂 Struktura Plików i Moduły
+
+Poniżej znajduje się spis najważniejszych modułów i plików w projekcie z bezpośrednimi odnośnikami:
+
+* **Konfiguracja Aplikacji i Routing**:
+  * [app/root.tsx](./app/root.tsx) — Główny szablon aplikacji (układ HTML), w którym zaimplementowano skrypty śledzące **Google Analytics** oraz **Hotjar/Contentsquare**.
+  * [app/routes.ts](./app/routes.ts) — Konfiguracja tras w systemie React Router.
+  * [app/app.css](./app/app.css) — Globalne arkusze stylów Tailwind CSS v4.
+  * [ProtectedRoute.tsx](./app/components/layout/ProtectedRoute.tsx) — Komponent zabezpieczający trasy aplikacji przed nieautoryzowanym dostępem.
+
+* **Autoryzacja**:
+  * [Login.tsx](./app/features/auth/components/Login.tsx) — Komponent ekranu logowania i rejestracji.
+  * [authService.ts](./app/features/auth/authService.ts) — Obsługa logowania Firebase i generowanie mockowanych użytkowników.
+  * [firebaseConfig.ts](./app/features/auth/firebaseConfig.ts) — Inicjalizacja i konfiguracja połączenia z Firebase.
+
+* **Panel Sterowania**:
+  * [Dashboard.tsx](./app/features/dashboard/components/Dashboard.tsx) — Główny pulpit z kafelkami statusów, szybkich akcji oraz wykresem energii.
+
+* **Zarządzanie Urządzeniami**:
+  * [Devices.tsx](./app/features/devices/components.tsx/Devices.tsx) — Widok listy i statusu urządzeń smart.
+  * [AddDevice.tsx](./app/features/addDevice/components/AddDevice.tsx) — Krok po kroku dodawanie nowego urządzenia.
+
+* **Automatyzacja i Sceny**:
+  * [Automation.tsx](./app/features/automation/components/Automation.tsx) — Panel automatyzacji i zarządzania scenami.
+  * [AddAutomationModal.tsx](./app/features/automation/components/AddAutomationModal.tsx) — Modal z formularzem kreatora nowych reguł logicznych.
+  * [LogicRuleRow.tsx](./app/features/automation/components/LogicRuleRow.tsx) — Prezentacja pojedynczej reguły wraz z jej warunkami i akcjami.
+  * [SceneCard.tsx](./app/features/automation/components/SceneCard.tsx) — Karta wyzwalania szybkiej sceny środowiskowej.
+
+* **Ustawienia**:
+  * [Settings.tsx](./app/features/settings/components/Settings.tsx) — Widok ustawień użytkownika i aplikacji.
+
+* **Dokumentacja Komponentów**:
+  * [Showcase.tsx](./app/features/showcase/components/Showcase.tsx) — Klocki UI i przegląd komponentów bazowych.
+
+* **Powiadomienia**:
+  * [Notifications.tsx](./app/features/notifications/components/Notifications.tsx) — Panel odbierania, czytania i filtrowania alertów oraz informacji o stanie domu.
+
+---
+
+## 📈 Integracja z Google Analytics & Hotjar
+
+### 1. Google Analytics 4
+W pliku [app/root.tsx](./app/root.tsx) zintegrowano kod śledzący z identyfikatorem pomiaru `G-D4Z5W2FK5T`.
+Aplikacja wysyła automatyczne zdarzenia takie jak:
+* Odsłony stron przy zmianie tras React Router.
+* Interakcje użytkownika z przełącznikami urządzeń.
+* Rejestracja nowo utworzonych automatyzacji oraz scen.
+
+### 2. Hotjar / Contentsquare
+Skrypt zbierający sesje użytkownika w czasie rzeczywistym jest wdrożony bezpośrednio w tagu `<head>` w [app/root.tsx](./app/root.tsx). Narzędzie to odpowiada za:
+* Rejestrowanie interakcji i ruchów kursora na pulpicie w celu ulepszania doświadczeń użytkownika.
+* Tworzenie map ciepła w celu zbadania, które elementy interfejsu są najczęściej używane przez użytkowników.
+* Identyfikację problemów z nawigacją na urządzeniach mobilnych.
+
+---
+
+## 📸 Galeria i Zrzuty Ekranu
+
+### A. Zrzuty Ekranu Aplikacji
+
+#### Widok Logowania
+`![Ekran logowania](./screenshots/logowanie.png)`
+
+#### Pulpit Główny
+`![Pulpit główny](screenshots/dashboard.png)`
+
+#### Lista Urządzeń
+`![Lista urządzeń](./screenshots/devices.png)`
+
+#### Panel Automatyzacji
+`![Panel automatyzacji](./screenshots/automation.png)`
+
+#### Modal Dodawania Reguły
+`![Modal dodawania reguły](./screenshots/automation2.png)`
+
+#### Panel powiadomień
+`![Panel powiadomień](./screenshots/notify.png)`
+
+#### Panel ustawień
+`![Panel ustawień](./screenshots/settings.png)`
+
+---
+
+### B. Zrzuty Ekranu z Narzędzi Analitycznych
+
+#### Google Analytics 4
+* Poniższy zrzut przedstawia panel główny pokazujący liczbę aktywnych użytkowników, odsłony poszczególnych podstron oraz demografię ruchu.
+  
+  *[MIEJSCE NA SCREEN: Raport Google Analytics - Ruch i Odsłony]*
+  `![Raport ruchu Google Analytics](docs/screenshots/ga_overview.png)`
+
+* Zdarzenia niestandardowe wysyłane z aplikacji (np. włączanie urządzeń, zmiana parametrów):
+  
+  *[MIEJSCE NA SCREEN: Raport zdarzeń Google Analytics]*
+  `![Zdarzenia Google Analytics](docs/screenshots/ga_events.png)`
+
+#### Hotjar / Contentsquare
+* Dashboard
+  
+`![Hotjar dashboard](./screenshots/hotjar.png)`
+* Session replay:
+`![Hotjar recordings](./screenshots/hotjar_recordings.png)`
+
+---
+
+## 🚀 Instrukcja Uruchomienia i Wdrożenia
+
+### Wymagania wstępne
+* Zainstalowane środowisko **Node.js** (rekomendowana wersja v20 lub nowsza)
+* Menedżer pakietów **npm**
+
+### 1. Lokalna instalacja i uruchomienie
+
+Pobierz zależności projektu:
 ```bash
 npm install
 ```
 
-### Development
-
-Start the development server with HMR:
-
+Uruchom serwer deweloperski z automatycznym odświeżaniem modułów w czasie rzeczywistym:
 ```bash
 npm run dev
 ```
+Aplikacja będzie dostępna pod adresem: `http://localhost:5173`.
 
-Your application will be available at `http://localhost:5173`.
+### 2. Budowanie produkcyjne
 
-## Building for Production
-
-Create a production build:
-
+Stwórz zoptymalizowaną wersję produkcyjną:
 ```bash
 npm run build
 ```
 
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
+Uruchom lokalnie serwer obsługujący build produkcyjny:
 ```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
+npm run start
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
+### 3. Wdrożenie za pomocą Docker
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
+Aplikacja jest w pełni gotowa do konteneryzacji przy użyciu przygotowanego wieloetapowego pliku [Dockerfile](./Dockerfile).
 
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+Zbuduj obraz Docker:
+```bash
+docker build -t concierge-app .
 ```
 
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+Uruchom kontener na porcie 3000:
+```bash
+docker run -p 3000:3000 concierge-app
+```
+Aplikacja zostanie udostępniona pod adresem `http://localhost:3000`.
 
 ---
 
-Built with ❤️ using React Router.
+Stworzono przy użyciu React Router.
