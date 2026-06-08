@@ -105,47 +105,52 @@ Skrypt zbierający sesje użytkownika w czasie rzeczywistym jest wdrożony bezpo
 ### A. Zrzuty Ekranu Aplikacji
 
 #### Widok Logowania
-`![Ekran logowania](./screenshots/logowanie.png)`
+![Ekran logowania](./screenshots/logowanie.png)
 
 #### Pulpit Główny
-`![Pulpit główny](screenshots/dashboard.png)`
+![Pulpit główny](./screenshots/dashboard.png)
 
 #### Lista Urządzeń
-`![Lista urządzeń](./screenshots/devices.png)`
+![Lista urządzeń](./screenshots/devices.png)
 
 #### Panel Automatyzacji
-`![Panel automatyzacji](./screenshots/automation.png)`
+![Panel automatyzacji](./screenshots/automation.png)
 
 #### Modal Dodawania Reguły
-`![Modal dodawania reguły](./screenshots/automation2.png)`
+![Modal dodawania reguły](./screenshots/automation2.png)
 
 #### Panel powiadomień
-`![Panel powiadomień](./screenshots/notify.png)`
+![Panel powiadomień](./screenshots/notify.png)
 
 #### Panel ustawień
-`![Panel ustawień](./screenshots/settings.png)`
+![Panel ustawień](./screenshots/settings.png)
 
 ---
 
 ### B. Zrzuty Ekranu z Narzędzi Analitycznych
 
 #### Google Analytics 4
-* Poniższy zrzut przedstawia panel główny pokazujący liczbę aktywnych użytkowników, odsłony poszczególnych podstron oraz demografię ruchu.
-  
-  *[MIEJSCE NA SCREEN: Raport Google Analytics - Ruch i Odsłony]*
-  `![Raport ruchu Google Analytics](docs/screenshots/ga_overview.png)`
 
-* Zdarzenia niestandardowe wysyłane z aplikacji (np. włączanie urządzeń, zmiana parametrów):
+* **Panel główny**: Przedstawia ogólne statystyki witryny, w tym liczbę aktywnych użytkowników, ogólną liczbę zdarzeń oraz aktywność użytkowników w czasie rzeczywistym z podziałem na minuty i kraje.
   
-  *[MIEJSCE NA SCREEN: Raport zdarzeń Google Analytics]*
-  `![Zdarzenia Google Analytics](docs/screenshots/ga_events.png)`
+  ![Panel główny Google Analytics](./screenshots/google1.png)
+
+* **Statystyki zdarzeń**: Szczegółowe zestawienie najczęstszych zdarzeń wywoływanych przez użytkowników w aplikacji (takich jak wyświetlenia stron, zaangażowanie oraz przewijanie strony) wraz z wykresami aktywności w czasie.
+  
+  ![Statystyki zdarzeń Google Analytics](./screenshots/google2.png)
+
+* **Raport geograficzny**: Wykres oraz tabela przedstawiająca liczbę aktywnych i nowych użytkowników w podziale geograficznym, wraz ze współczynnikiem zaangażowania i średnim czasem trwania sesji.
+  
+  ![Aktywność użytkowników według krajów](./screenshots/google3.png)
 
 #### Hotjar / Contentsquare
 * Dashboard
   
-`![Hotjar dashboard](./screenshots/hotjar.png)`
+![Hotjar dashboard](./screenshots/hotjar.png)
+
 * Session replay:
-`![Hotjar recordings](./screenshots/hotjar_recordings.png)`
+
+![Hotjar recordings](./screenshots/hotjar_recordings.png)
 
 ---
 
